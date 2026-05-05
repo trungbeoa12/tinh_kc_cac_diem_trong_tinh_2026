@@ -1,168 +1,173 @@
-## 1. Mục tiêu
+# Huong Dan Su Dung Crawl Google Maps
 
-- **Đầu vào**: File Excel `ml_thay_doi_drop_2025_sang_2026.xlsx` chứa các cặp PGD/CN và tọa độ (`kinh_do_1`, `vi_do_1`, `kinh_do_2`, `vi_do_2`).
-- **Quy trình**:
-  1. Chia file Excel thành nhiều file nhỏ `df_part_XX.pkl` (mỗi file 100 dòng).
-  2. Dùng `run_crawl_part.py` để crawl khoảng cách đường bộ từ Google Maps cho từng part.
-- **Đầu ra**: Các file Excel kết quả trong thư mục `part/output_part_XX/ket_qua_tu_...xlsx`.
+## 1. Data Dang Dung
 
----
+Project hien chi giu luong crawl cho data moi:
 
-## 2. Chuẩn bị môi trường
+- File goc: `data_20260504/data_20260504.xlsx`
+- File input crawl: `data_20260504/ml_to_hop_crawl_20260504.xlsx`
+- Part crawl: `part/df_part_XX.pkl`
+- Output crawl: `part/output_part_XX/ket_qua_tu_...xlsx`
 
-- Mở terminal và chạy:
+Luong xu ly:
+
+```text
+data_20260504/data_20260504.xlsx
+-> generate_crawl_input.py
+-> data_20260504/ml_to_hop_crawl_20260504.xlsx
+-> split_to_part_100.py
+-> part/df_part_XX.pkl
+-> run_crawl_part.py
+-> part/output_part_XX/ket_qua_tu_...xlsx
+```
+
+## 2. Chuan Bi Moi Truong
 
 ```bash
-cd /home/trungdt2/Documents/GIS_VTB_Project2025/crawl_all_khoang_cach
-
+cd /home/trungdt2/Documents/crawl_all_khoang_cach/tinh_kc_cac_diem_trong_tinh_2026
 python -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 pip install pandas selenium webdriver-manager openpyxl
 ```
 
-- Đảm bảo máy đã cài **Google Chrome**.
+May can co Google Chrome. Lan chay dau tien co the can internet de `webdriver-manager` tai ChromeDriver.
 
----
+## 3. Tao File Input Crawl
 
-## 3. Bước 1: Chia file Excel thành các part 100 dòng
-
-- Script chia part: `split_to_part_100.py`
-- Đường dẫn file Excel nguồn đã được cấu hình sẵn trong script:
-
-```python
-BASE_DIR = "/home/trungdt2/Documents/GIS_VTB_Project2025/crawl_all_khoang_cach"
-SOURCE_FILE = os.path.join(
-    BASE_DIR,
-    "data_20260313/output_2026/ml_thay_doi_drop_2025_sang_2026.xlsx",
-)
-PART_FOLDER = os.path.join(BASE_DIR, "part")
-ROWS_PER_PART = 100
-```
-
-- Cách chạy:
+Chay:
 
 ```bash
-cd /home/trungdt2/Documents/GIS_VTB_Project2025/crawl_all_khoang_cach
-source .venv/bin/activate   # nếu đang dùng venv
+python generate_crawl_input.py
+```
+
+Script nay doc `data_20260504/data_20260504.xlsx`, tao tat ca cap diem cung tinh, tinh them `khoang_cach_chim_bay`, va ghi ra:
+
+```text
+data_20260504/ml_to_hop_crawl_20260504.xlsx
+data_20260504/sample_ml_to_hop_crawl_20260504_head.csv
+```
+
+## 4. Chia Part
+
+Chay:
+
+```bash
 python split_to_part_100.py
 ```
 
-- Kết quả:
-  - Thư mục `part/` sẽ có:
-    - `df_part_01.pkl`, `df_part_02.pkl`, ..., `df_part_NN.pkl`
-  - Mỗi file `.pkl` là 1 `DataFrame` ~100 dòng, đã có sẵn cột `Khoảng cách đường bộ` (ban đầu là `None`).
+Voi data hien tai:
 
----
+- Tong dong input crawl: `30,750`
+- So dong moi part: `100`
+- Tong so part: `308`
+- Part cuoi: `50` dong
 
-## 4. Bước 2: Cấu hình script crawl `run_crawl_part.py`
+## 5. Test Truoc Khi Chay Dai
 
-- File: `run_crawl_part.py`
-- Phần cấu hình quan trọng:
-
-```python
-PART_ID = 1  # <== 👈 Thay số này thành từ 1 đến 56 (tương ứng số part)
-DATA_FOLDER = "/home/trungdt2/Documents/GIS_VTB_Project2025/crawl_all_khoang_cach/part"
-
-BATCH_SIZE = 100   # số dòng xử lý mỗi batch
-SLEEP_TIME = 2     # thời gian nghỉ giữa các request (giây)
-WAIT_TIME = 10     # timeout chờ Google Maps trả kết quả (giây)
-```
-
-- Mapping cột tọa độ trong dữ liệu mới:
-
-```python
-lat1, lon1 = row['vi_do_1'], row['kinh_do_1']
-lat2, lon2 = row['vi_do_2'], row['kinh_do_2']
-```
-
----
-
-## 5. Bước 3: Chạy crawl cho từng part
-
-### 5.1. Chạy cho `PART_ID = 1`
-
-1. Mở `run_crawl_part.py`, đảm bảo:
-
-```python
-PART_ID = 1
-```
-
-2. Trong terminal:
+Test 1 dong dau tien:
 
 ```bash
-cd /home/trungdt2/Documents/GIS_VTB_Project2025/crawl_all_khoang_cach
-source .venv/bin/activate
-python run_crawl_part.py
+PART_ID=1 MAX_ROWS=1 BATCH_SIZE=1 SLEEP_TIME=1 WAIT_TIME=10 python run_crawl_part.py
 ```
 
-3. Script sẽ:
-   - Đọc file: `part/df_part_01.pkl`
-   - Chạy crawl Google Maps cho tối đa 100 dòng.
-   - Lưu kết quả vào:
-     - Thư mục: `part/output_part_01/`
-     - File: `ket_qua_tu_0_den_99.xlsx`
+Neu thanh cong, output test se nam o:
 
-### 5.2. Chạy cho các `PART_ID` tiếp theo
-
-- Lặp lại cho từng part:
-
-1. Mở `run_crawl_part.py`, đổi:
-
-```python
-PART_ID = 2   # rồi 3, 4, ..., tới số part tối đa
+```text
+part/output_part_01/ket_qua_tu_0_den_0.xlsx
 ```
 
-2. Chạy lại:
+Test 5 dong:
 
 ```bash
-python run_crawl_part.py
+PART_ID=1 MAX_ROWS=5 BATCH_SIZE=5 SLEEP_TIME=2 WAIT_TIME=10 python run_crawl_part.py
 ```
 
-- Mỗi part sẽ tạo 1 thư mục kết quả riêng:
-  - `part/output_part_02/ket_qua_tu_0_den_99.xlsx`
-  - ...
+## 6. Chay Mot Part
 
----
+Chay part 1:
 
-## 6. Gộp kết quả các part (tùy chọn)
-
-- Sau khi crawl xong tất cả `PART_ID`, có thể gộp lại:
-
-```python
-import os
-import pandas as pd
-
-BASE_DIR = "/home/trungdt2/Documents/GIS_VTB_Project2025/crawl_all_khoang_cach"
-PART_FOLDER = os.path.join(BASE_DIR, "part")
-
-all_dfs = []
-
-for part_id in range(1, 57):  # điều chỉnh số part tối đa
-    folder = os.path.join(PART_FOLDER, f"output_part_{part_id:02d}")
-    if not os.path.isdir(folder):
-        continue
-
-    for fname in os.listdir(folder):
-        if fname.endswith(".xlsx"):
-            path = os.path.join(folder, fname)
-            all_dfs.append(pd.read_excel(path))
-
-full_df = pd.concat(all_dfs, ignore_index=True)
-out_path = os.path.join(BASE_DIR, "data_20260313/output_2026/kc_duong_bo_full_2026.xlsx")
-full_df.to_excel(out_path, index=False)
-print("Đã lưu file tổng:", out_path)
+```bash
+PART_ID=1 python run_crawl_part.py
 ```
 
----
+Chay part khac:
 
-## 7. Một số lưu ý
+```bash
+PART_ID=25 python run_crawl_part.py
+```
 
-- **Google có thể chặn** nếu crawl quá nhanh:
-  - Tăng `SLEEP_TIME` lên 3–5 giây.
-  - Giảm số part chạy song song (chỉ nên 1 script trên 1 máy).
-- Nếu ChromeDriver lỗi version:
-  - Xóa cache webdriver-manager hoặc cập nhật Google Chrome.
-- Khi cần chia lại dữ liệu nguồn:
-  - Chỉ cần sửa đường dẫn trong `split_to_part_100.py` và chạy lại script.
+Mac dinh moi part co 100 dong. Output cua part 25 se nam o:
 
+```text
+part/output_part_25/
+```
+
+## 7. Chay Song Song Hai Terminal
+
+Hai script da co san:
+
+- `run_schedule_A.sh`: chay cac part le `1, 3, 5, ..., 307`
+- `run_schedule_B.sh`: chay cac part chan `2, 4, 6, ..., 308`
+
+Mac dinh:
+
+- `SLEEP_TIME=3`: nghi 3 giay giua moi request Google Maps trong 1 part.
+- `REST_BETWEEN_PARTS=300`: nghi 5 phut sau moi part.
+- `WAIT_TIME=10`: doi toi da 10 giay de Google Maps tra ket qua.
+- `BATCH_SIZE=100`: xu ly 100 dong moi part.
+
+Terminal 1:
+
+```bash
+./run_schedule_A.sh
+```
+
+Terminal 2:
+
+```bash
+./run_schedule_B.sh
+```
+
+## 8. Chay Cham Hon Cho An Toan
+
+Neu muon giam nguy co bi Google chan:
+
+Terminal 1:
+
+```bash
+SLEEP_TIME=5 REST_BETWEEN_PARTS=600 ./run_schedule_A.sh
+```
+
+Terminal 2:
+
+```bash
+SLEEP_TIME=5 REST_BETWEEN_PARTS=600 ./run_schedule_B.sh
+```
+
+Trong do:
+
+- `SLEEP_TIME=5`: nghi 5 giay giua tung dong crawl.
+- `REST_BETWEEN_PARTS=600`: nghi 10 phut sau moi part.
+
+## 9. Resume Khi Bi Dung Giua Chung
+
+Script co co che resume theo file output. Neu output cua batch da ton tai, script se bo qua:
+
+```text
+part/output_part_XX/ket_qua_tu_START_den_END.xlsx
+```
+
+Vi vay neu may tat hoac terminal bi dung, chi can chay lai lenh cu:
+
+```bash
+./run_schedule_A.sh
+./run_schedule_B.sh
+```
+
+## 10. Luu Y
+
+- Neu ket qua co nhieu dong `Khong tim thay`, tang `SLEEP_TIME` len `5` hoac `7`.
+- Neu Google Maps load cham, tang `WAIT_TIME` len `15` hoac `20`.
+- Khong nen xoa thu muc `part/output_part_XX` neu muon resume.
+- Neu muon crawl lai tu dau, can xoa output cu trong `part/output_part_XX`.

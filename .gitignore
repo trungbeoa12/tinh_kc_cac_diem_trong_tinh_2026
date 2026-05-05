@@ -6,3 +6,9 @@ __pycache__/
 .DS_Store
 .env
 .env.*
+
+# Generated crawl outputs
+part/output_part_*/
+
+# Office temporary lock files
+.~lock.*#

@@ -15,16 +15,17 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
 # ========== CẤU HÌNH ==========
-# PART_ID có thể set qua biến môi trường: PART_ID=12 python run_crawl_part.py
+# PART_ID co the set qua bien moi truong: PART_ID=1 python run_crawl_part.py
 PART_ID = int(os.environ.get("PART_ID", "1"))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FOLDER = os.path.join(BASE_DIR, "part")
 OUTPUT_FOLDER = os.path.join(DATA_FOLDER, f"output_part_{PART_ID:02d}")
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
-BATCH_SIZE = 100
-SLEEP_TIME = 2
-WAIT_TIME = 10
+BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "100"))
+SLEEP_TIME = float(os.environ.get("SLEEP_TIME", "2"))
+WAIT_TIME = int(os.environ.get("WAIT_TIME", "10"))
+MAX_ROWS = os.environ.get("MAX_ROWS")
 
 # ========== TRÌNH DUYỆT ==========
 class GoogleMapsDistanceCalculator:
@@ -94,8 +95,7 @@ def crawl_with_resume(df_input):
                 continue
 
             row = df.loc[idx]
-            # Với bộ dữ liệu mới ml_thay_doi_drop_2025_sang_2026.xlsx,
-            # sử dụng tên cột: vi_do_1, kinh_do_1, vi_do_2, kinh_do_2
+            # Input crawl dung ten cot: vi_do_1, kinh_do_1, vi_do_2, kinh_do_2.
             lat1, lon1 = row['vi_do_1'], row['kinh_do_1']
             lat2, lon2 = row['vi_do_2'], row['kinh_do_2']
 
@@ -114,5 +114,6 @@ def crawl_with_resume(df_input):
 # ========== CHẠY ==========
 file_path = os.path.join(DATA_FOLDER, f"df_part_{PART_ID:02d}.pkl")
 df_part = pd.read_pickle(file_path)
+if MAX_ROWS:
+    df_part = df_part.head(int(MAX_ROWS))
 crawl_with_resume(df_part)
-

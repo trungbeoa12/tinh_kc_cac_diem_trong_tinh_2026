@@ -1,15 +1,26 @@
 #!/usr/bin/env bash
-# Terminal B: chạy run_crawl_part_B.py lần lượt các part lẻ từ 13 → 55
-# Đã chạy xong part 1–11, bắt đầu từ part 13.
+# Terminal B: chay run_crawl_part.py cho cac part chan cua data_20260504.
+
+set -euo pipefail
 
 cd "$(dirname "$0")"
 
-for part in 13 15 17 19 21 23 25 27 29 31 33 35 37 39 41 43 45 47 49 51 53 55; do
+REST_BETWEEN_PARTS=${REST_BETWEEN_PARTS:-300}
+SLEEP_TIME=${SLEEP_TIME:-3}
+WAIT_TIME=${WAIT_TIME:-10}
+BATCH_SIZE=${BATCH_SIZE:-100}
+
+for part in $(seq 2 2 308); do
   echo ""
-  echo "========== Terminal B: Part $part =========="
-  PART_ID=$part python run_crawl_part_B.py
+  echo "========== Terminal B: Part $part | $(date '+%Y-%m-%d %H:%M:%S') =========="
+  PART_ID=$part SLEEP_TIME=$SLEEP_TIME WAIT_TIME=$WAIT_TIME BATCH_SIZE=$BATCH_SIZE python run_crawl_part.py
   echo "========== Xong part $part =========="
+
+  if [ "$part" -lt 308 ]; then
+    echo "Nghi ${REST_BETWEEN_PARTS}s truoc part tiep theo..."
+    sleep "$REST_BETWEEN_PARTS"
+  fi
 done
 
 echo ""
-echo "🎉 Terminal B: Đã chạy xong tất cả part lẻ 13–55."
+echo "Terminal B: Da chay xong cac part chan."

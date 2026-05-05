@@ -6,10 +6,10 @@ import pandas as pd
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# File Excel nguồn mà bạn đưa:
+# File Excel nguồn dùng để crawl Google Maps.
 SOURCE_FILE = os.path.join(
     BASE_DIR,
-    "data_20260313/output_2026/ml_thay_doi_drop_2025_sang_2026.xlsx",
+    "data_20260504/ml_to_hop_crawl_20260504.xlsx",
 )
 
 # Nơi lưu các file df_part_XX.pkl để crawl
