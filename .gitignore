@@ -7,8 +7,9 @@ __pycache__/
 .env
 .env.*
 
-# Generated crawl outputs
-part/output_part_*/
+# Generated crawl work files
+work/
+part/
 
 # Office temporary lock files
 .~lock.*#
