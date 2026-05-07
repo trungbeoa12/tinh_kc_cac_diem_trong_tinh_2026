@@ -1,7 +1,0 @@
-source_rows=30750
-final_rows=30750
-ok_rows=30611
-remaining_failed_rows=139
-remaining_by_status=not_found_or_error:139
-final_file=data_20260504/final/road_distance_20260504_final.xlsx
-remaining_file=data_20260504/diagnostics/failed_rows_20260504.xlsx

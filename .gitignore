@@ -11,5 +11,8 @@ __pycache__/
 work/
 part/
 
+# Versioned data outputs (keep templates under docs/)
+data_*/
+
 # Office temporary lock files
 .~lock.*#

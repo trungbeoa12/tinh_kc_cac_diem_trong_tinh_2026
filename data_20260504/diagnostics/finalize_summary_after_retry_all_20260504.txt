@@ -1,8 +1,0 @@
-final_rows=30750
-ok_rows_before_merge=30684
-ok_rows_after_merge=30687
-merged_success_rows=3
-remaining_failed_rows=63
-remaining_by_status=not_found_or_error:63
-final_file=data_20260504/final/road_distance_20260504_final.xlsx
-remaining_file=data_20260504/diagnostics/failed_rows_after_retry_all_20260504.xlsx
