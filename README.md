@@ -255,6 +255,38 @@ Voi dot data moi:
 
 File merge cuoi cua dot `20260504` da duoc luu san trong `data_20260504/final/`.
 
+## Recrawl HIGH/MEDIUM Suspects
+
+Repo da co san input compare va batch recrawl cho dot `20260504` vs `20260312`:
+
+```text
+debug_outputs/compare_20260504_vs_20260312/
+debug_outputs/recrawl_all_suspects_20260504_vs_20260312/
+```
+
+Neu can tao lai 3 batch tu file HIGH/MEDIUM:
+
+```bash
+./.venv/bin/python scripts/prepare_recrawl_all_suspects_batches.py
+```
+
+Chay recrawl tuan tu ca 3 batch:
+
+```bash
+bash debug_outputs/recrawl_all_suspects_20260504_vs_20260312/run_all_recrawl_batches.sh
+```
+
+Hoac chay tung batch:
+
+```bash
+bash debug_outputs/recrawl_all_suspects_20260504_vs_20260312/run_recrawl_batch_01.sh
+bash debug_outputs/recrawl_all_suspects_20260504_vs_20260312/run_recrawl_batch_02.sh
+bash debug_outputs/recrawl_all_suspects_20260504_vs_20260312/run_recrawl_batch_03.sh
+```
+
+Output moi se nam trong `debug_outputs/recrawl_all_suspects_20260504_vs_20260312/output_batch_XX/`.
+Script recrawl khong ghi de output da ton tai neu khong truyen `--overwrite`.
+
 ## Tai Lieu Cu
 
 Tai lieu trong `docs/`:

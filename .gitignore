@@ -11,6 +11,11 @@ __pycache__/
 work/
 part/
 
+# Debug/runtime artifacts
+debug_screenshots/
+debug_outputs/**/logs/
+debug_outputs/**/output_batch_*/
+
 # Versioned data outputs (keep templates under docs/)
 data_*/
 

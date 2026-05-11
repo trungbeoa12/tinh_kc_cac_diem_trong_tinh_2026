@@ -39,6 +39,21 @@ KM_COL = "Khoảng cách đường bộ km"
 TIME_COL = "thời gian"
 STATUS_COL = "crawl_status"
 
+DEBUG_COLUMNS = [
+    "origin_input",
+    "destination_input",
+    "google_maps_url",
+    "crawl_timestamp",
+    "route_panel_raw_text",
+    "selected_route_index",
+    "selected_route_raw_text",
+    "parsed_distance_text",
+    "parsed_duration_text",
+    "parsed_distance_km",
+    "screenshot_path",
+    "status_check",
+]
+
 # ===== CRAWL CONFIGURATION =====
 # Default environment variables from crawl_parts.sh
 CRAWL_DEFAULTS = {

@@ -1,0 +1,74 @@
+{
+  "summary": {
+    "google_maps_url": "https://www.google.com/maps/dir/11.29029,106.7955924/10.75028,106.61129/data=!4m2!4m1!3e0",
+    "conclusion": "f) lỗi cũ nhiều khả năng do stale route, selector cũ, mạng/VPN/load chưa ổn định"
+  },
+  "attempts": [
+    {
+      "attempt": "attempt_1",
+      "origin_input": "11.29029,106.7955924",
+      "destination_input": "10.75028,106.61129",
+      "google_maps_url": "https://www.google.com/maps/dir/11.29029,106.7955924/10.75028,106.61129/data=!4m2!4m1!3e0",
+      "crawl_timestamp": "2026-05-11T09:23:58",
+      "current_url_after_load": "https://www.google.com/maps/dir/11.29029,106.7955924/10.75028,106.61129/data=!4m2!4m1!3e0",
+      "page_title": "575 ĐT741, Phú Giáo, Hồ Chí Minh, Vietnam to 292 Đ. Tên Lửa, An Lạc, Hồ Chí Minh, Vietnam - Google Maps",
+      "route_panel_raw_text": "\nLeave now\n\nOptions\n\nSend directions to your phone\n\nCopy link\n\n2 hr 31 min\n79.7 km\nvia Nguyễn Văn Thành/ĐT741\nFastest route, despite the usual traffic\n This route has tolls.\nDetails\nPreview\n\n2 hr 38 min\n82.4 km\nvia ĐH411/ĐT746\nSome traffic, as usual\n\n2 hr 54 min\n89.6 km\nvia ĐH411/ĐT746 and ĐT743\nSlower traffic than usual\nExplore nearby 292 Đ. Tên Lửa\n\nRestaurants\n\nHotels\n\nGas stations\n\nParking Lots\n\nMore\n\nNew! Continue your trip, tap the notification on your phone to get directions\n",
+      "selected_route_index": 0,
+      "selected_route_raw_text": "2 hr 31 min\n79.7 km",
+      "parsed_distance_text": "79.7 km",
+      "parsed_duration_text": "2 hr 31 min",
+      "parsed_distance_km": 79.7,
+      "khoang_cach_chim_bay": 63.32622869,
+      "ratio_distance_to_air": 1.2586,
+      "status_check": "OK",
+      "screenshot_path": "debug_screenshots/debug_single_route_attempt_1_20260511_092400.png",
+      "all_distance_texts": [
+        "79.7 km"
+      ]
+    },
+    {
+      "attempt": "attempt_2",
+      "origin_input": "11.29029,106.7955924",
+      "destination_input": "10.75028,106.61129",
+      "google_maps_url": "https://www.google.com/maps/dir/11.29029,106.7955924/10.75028,106.61129/data=!4m2!4m1!3e0",
+      "crawl_timestamp": "2026-05-11T09:24:00",
+      "current_url_after_load": "https://www.google.com/maps/dir/11.29029,106.7955924/10.75028,106.61129/data=!4m2!4m1!3e0",
+      "page_title": "575 ĐT741, Phú Giáo, Hồ Chí Minh, Vietnam to 292 Đ. Tên Lửa, An Lạc, Hồ Chí Minh, Vietnam - Google Maps",
+      "route_panel_raw_text": "\nLeave now\n\nOptions\n\nSend directions to your phone\n\nCopy link\n\n2 hr 31 min\n79.7 km\nvia Nguyễn Văn Thành/ĐT741\nFastest route, despite the usual traffic\n This route has tolls.\nDetails\nPreview\n\n2 hr 38 min\n82.4 km\nvia ĐH411/ĐT746\nSome traffic, as usual\n\n2 hr 54 min\n89.6 km\nvia ĐH411/ĐT746 and ĐT743\nSlower traffic than usual\nExplore nearby 292 Đ. Tên Lửa\n\nRestaurants\n\nHotels\n\nGas stations\n\nParking Lots\n\nMore\n\nNew! Continue your trip, tap the notification on your phone to get directions\n",
+      "selected_route_index": 0,
+      "selected_route_raw_text": "2 hr 31 min\n79.7 km",
+      "parsed_distance_text": "79.7 km",
+      "parsed_duration_text": "2 hr 31 min",
+      "parsed_distance_km": 79.7,
+      "khoang_cach_chim_bay": 63.32622869,
+      "ratio_distance_to_air": 1.2586,
+      "status_check": "POSSIBLE_STALE_ROUTE",
+      "screenshot_path": "debug_screenshots/debug_single_route_attempt_2_20260511_092402.png",
+      "all_distance_texts": [
+        "79.7 km"
+      ]
+    },
+    {
+      "attempt": "attempt_3",
+      "origin_input": "11.29029,106.7955924",
+      "destination_input": "10.75028,106.61129",
+      "google_maps_url": "https://www.google.com/maps/dir/11.29029,106.7955924/10.75028,106.61129/data=!4m2!4m1!3e0",
+      "crawl_timestamp": "2026-05-11T09:24:02",
+      "current_url_after_load": "https://www.google.com/maps/dir/11.29029,106.7955924/10.75028,106.61129/data=!4m2!4m1!3e0",
+      "page_title": "575 ĐT741, Phú Giáo, Hồ Chí Minh, Vietnam to 292 Đ. Tên Lửa, An Lạc, Hồ Chí Minh, Vietnam - Google Maps",
+      "route_panel_raw_text": "\nLeave now\n\nOptions\n\nSend directions to your phone\n\nCopy link\n\n2 hr 31 min\n79.7 km\nvia Nguyễn Văn Thành/ĐT741\nFastest route, despite the usual traffic\n This route has tolls.\nDetails\nPreview\n\n2 hr 38 min\n82.4 km\nvia ĐH411/ĐT746\nSome traffic, as usual\n\n2 hr 54 min\n89.6 km\nvia ĐH411/ĐT746 and ĐT743\nSlower traffic than usual\nExplore nearby 292 Đ. Tên Lửa\n\nRestaurants\n\nHotels\n\nGas stations\n\nParking Lots\n\nMore\n\nNew! Continue your trip, tap the notification on your phone to get directions\n",
+      "selected_route_index": 0,
+      "selected_route_raw_text": "2 hr 31 min\n79.7 km",
+      "parsed_distance_text": "79.7 km",
+      "parsed_duration_text": "2 hr 31 min",
+      "parsed_distance_km": 79.7,
+      "khoang_cach_chim_bay": 63.32622869,
+      "ratio_distance_to_air": 1.2586,
+      "status_check": "POSSIBLE_STALE_ROUTE",
+      "screenshot_path": "debug_screenshots/debug_single_route_attempt_3_20260511_092403.png",
+      "all_distance_texts": [
+        "79.7 km"
+      ]
+    }
+  ]
+}

@@ -20,6 +20,7 @@ PROJECT_ROOT = config.PROJECT_ROOT
 DISTANCE_COL = config.DISTANCE_COL
 KM_COL = config.KM_COL
 TIME_COL = config.TIME_COL
+DEBUG_COLUMNS = config.DEBUG_COLUMNS
 DISTANCE_RE = config.DISTANCE_REGEX
 ERROR_RE = config.ERROR_KEYWORDS
 
@@ -112,11 +113,17 @@ def read_output_files(part_folder: Path, source_rows: int) -> pd.DataFrame:
         df = df[(df["global_index"] >= 0) & (df["global_index"] < source_rows)].copy()
         df["_source_output_file"] = str(path.relative_to(PROJECT_ROOT))
         df["_range_width"] = end - start
-        records.append(df[["global_index", DISTANCE_COL, "_source_output_file", "_range_width"]])
+        for column in DEBUG_COLUMNS:
+            if column not in df.columns:
+                df[column] = None
+
+        records.append(
+            df[["global_index", DISTANCE_COL, *DEBUG_COLUMNS, "_source_output_file", "_range_width"]]
+        )
 
     if not records:
         return pd.DataFrame(
-            columns=["global_index", DISTANCE_COL, "_source_output_file", "_range_width"]
+            columns=["global_index", DISTANCE_COL, *DEBUG_COLUMNS, "_source_output_file", "_range_width"]
         )
 
     results = pd.concat(records, ignore_index=True)
@@ -141,7 +148,7 @@ def main() -> None:
     best = results.drop_duplicates("global_index", keep="first")
 
     merged = source.merge(
-        best[["global_index", DISTANCE_COL, "_source_output_file"]],
+        best[["global_index", DISTANCE_COL, *DEBUG_COLUMNS, "_source_output_file"]],
         on="global_index",
         how="left",
     ).rename(columns={"_source_output_file": "source_output_file"})
@@ -158,6 +165,13 @@ def main() -> None:
     merged["crawl_status"] = "ok"
     merged.loc[missing, "crawl_status"] = "missing_distance"
     merged.loc[error, "crawl_status"] = "not_found_or_error"
+    if "status_check" in merged.columns:
+        suspect = merged["status_check"].astype("string").str.contains("SUSPECT_DISTANCE", na=False)
+        parse_failed = merged["status_check"].astype("string").str.contains("PARSE_FAILED", na=False)
+        route_not_ready = merged["status_check"].astype("string").str.contains("ROUTE_NOT_READY", na=False)
+        merged.loc[suspect & ~failed, "crawl_status"] = "suspect_distance"
+        merged.loc[parse_failed & ~failed, "crawl_status"] = "parse_failed"
+        merged.loc[route_not_ready & ~failed, "crawl_status"] = "route_not_ready"
 
     remaining = merged.loc[failed].copy()
 

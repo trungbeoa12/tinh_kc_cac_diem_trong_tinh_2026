@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import logging
 import os
+import re
 import sys
 import time
 from datetime import datetime
@@ -58,6 +59,7 @@ PART_ID = int(os.environ.get("PART_ID", "1"))
 DATA_FOLDER = Path(os.environ.get("PART_FOLDER", config.PART_FOLDER))
 OUTPUT_FOLDER = DATA_FOLDER / f"output_part_{PART_ID:02d}"
 OUTPUT_FOLDER.mkdir(parents=True, exist_ok=True)
+SCREENSHOT_FOLDER = config.PROJECT_ROOT / "debug_screenshots"
 
 BATCH_SIZE = int(os.environ.get("BATCH_SIZE", config.CRAWL_DEFAULTS["BATCH_SIZE"]))
 SLEEP_TIME = float(os.environ.get("SLEEP_TIME", config.CRAWL_DEFAULTS["SLEEP_TIME"]))
@@ -66,12 +68,89 @@ MAX_ROWS = os.environ.get("MAX_ROWS")
 
 logger = setup_logging(PART_ID)
 
+DEBUG_COLUMNS = config.DEBUG_COLUMNS
+
+ROUTE_PANEL_SELECTORS = [
+    "div[role='main']",
+    "div.m6QErb.DxyBCb.kA9KIf.dS8AEf",
+    "div.section-directions-trip",
+    "body",
+]
+
+DISTANCE_ANYWHERE_RE = re.compile(r"(?P<num>\d+(?:[,.]\d+)?)\s*(?P<unit>km|m)\b", re.I)
+DURATION_ANYWHERE_RE = re.compile(
+    r"(?:(?:\d+\s*(?:hr|hour|hours|h|giờ|gio))\s*)?\d+\s*(?:min|mins|minute|minutes|phút|phut)\b|"
+    r"\d+\s*(?:hr|hour|hours|h|giờ|gio)\b",
+    re.I,
+)
+
+
+def _clean_text(value: str | None) -> str:
+    return " ".join(str(value or "").split())
+
+
+def parse_distance_text(value: str | None) -> tuple[str | None, float | None]:
+    text = str(value or "")
+    matches = list(DISTANCE_ANYWHERE_RE.finditer(text))
+    if not matches:
+        return None, None
+
+    # In route cards the usable distance is normally the last distance-like token.
+    match = matches[-1]
+    distance_text = match.group(0)
+    number = float(match.group("num").replace(",", "."))
+    unit = match.group("unit").lower()
+    km = number if unit == "km" else number / 1000
+    return distance_text, round(km, 2)
+
+
+def parse_duration_text(value: str | None) -> str | None:
+    match = DURATION_ANYWHERE_RE.search(str(value or ""))
+    return match.group(0) if match else None
+
+
+def build_status_check(
+    route_panel_raw_text: str,
+    selected_route_raw_text: str,
+    parsed_distance_km: float | None,
+    air_distance_km: float | None,
+    previous_route_raw_text: str | None,
+) -> str:
+    statuses: list[str] = []
+    panel_text = route_panel_raw_text or ""
+
+    if parsed_distance_km is None:
+        statuses.append("PARSE_FAILED")
+
+    has_distance = bool(DISTANCE_ANYWHERE_RE.search(panel_text))
+    has_duration = bool(DURATION_ANYWHERE_RE.search(panel_text))
+    if not has_distance or not has_duration:
+        statuses.append("ROUTE_NOT_READY")
+
+    if (
+        parsed_distance_km is not None
+        and air_distance_km is not None
+        and air_distance_km > 0
+        and parsed_distance_km / air_distance_km > 1.8
+    ):
+        statuses.append("SUSPECT_DISTANCE")
+
+    if (
+        previous_route_raw_text
+        and selected_route_raw_text
+        and _clean_text(previous_route_raw_text) == _clean_text(selected_route_raw_text)
+    ):
+        statuses.append("POSSIBLE_STALE_ROUTE")
+
+    return "|".join(statuses) if statuses else "OK"
+
 # ========== TRÌNH DUYỆT ==========
 class GoogleMapsDistanceCalculator:
     def __init__(self, logger: logging.Logger):
         self.driver = None
         self.logger = logger
         self.consecutive_not_found = 0
+        self.previous_route_raw_text: str | None = None
         self.setup_driver()
 
     def setup_driver(self):
@@ -89,32 +168,123 @@ class GoogleMapsDistanceCalculator:
             self.logger.error(f"✗ Failed to initialize webdriver: {e}")
             raise
 
-    def calculate_distance(self, lat1: float, lon1: float, lat2: float, lon2: float) -> str | None:
+    def _get_first_text(self, selectors: list[str]) -> str:
+        for selector in selectors:
+            try:
+                elements = self.driver.find_elements(By.CSS_SELECTOR, selector)
+                for element in elements:
+                    text = element.text.strip()
+                    if text:
+                        return text
+            except Exception:
+                continue
+        return ""
+
+    def _wait_for_route_panel_text(self) -> str:
+        def panel_has_route_text(driver):
+            text = self._get_first_text(ROUTE_PANEL_SELECTORS)
+            if DISTANCE_ANYWHERE_RE.search(text) or config.ERROR_KEYWORDS.search(text):
+                return text
+            return False
+
+        try:
+            return WebDriverWait(self.driver, WAIT_TIME).until(panel_has_route_text)
+        except Exception:
+            return self._get_first_text(ROUTE_PANEL_SELECTORS)
+
+    def _capture_screenshot(self, row_key: str) -> str:
+        SCREENSHOT_FOLDER.mkdir(parents=True, exist_ok=True)
+        filename = f"part_{PART_ID:02d}_{row_key}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
+        path = SCREENSHOT_FOLDER / filename
+        self.driver.save_screenshot(str(path))
+        try:
+            return str(path.relative_to(config.PROJECT_ROOT))
+        except ValueError:
+            return str(path)
+
+    def calculate_distance(
+        self,
+        lat1: float,
+        lon1: float,
+        lat2: float,
+        lon2: float,
+        air_distance_km: float | None = None,
+        row_key: str = "row",
+    ) -> tuple[str | None, dict[str, object]]:
         """
         Query Google Maps for distance between two coordinates.
         
         Returns:
-            Distance text from Google Maps, "Không tìm thấy" if not found, or None on error.
+            Tuple of distance text and debug metadata.
         """
+        origin_input = f"{lat1},{lon1}"
+        destination_input = f"{lat2},{lon2}"
+        url = f"https://www.google.com/maps/dir/{origin_input}/{destination_input}/data=!4m2!4m1!3e0"
+        debug_info: dict[str, object] = {
+            "origin_input": origin_input,
+            "destination_input": destination_input,
+            "google_maps_url": url,
+            "crawl_timestamp": datetime.now().isoformat(timespec="seconds"),
+            "route_panel_raw_text": "",
+            "selected_route_index": None,
+            "selected_route_raw_text": "",
+            "parsed_distance_text": None,
+            "parsed_duration_text": None,
+            "parsed_distance_km": None,
+            "screenshot_path": None,
+            "status_check": "ERROR",
+        }
+
         try:
-            url = f"https://www.google.com/maps/dir/{lat1},{lon1}/{lat2},{lon2}/data=!4m2!4m1!3e0"
             self.driver.get(url)
-            time.sleep(4)
+            time.sleep(2)
+            route_panel_raw_text = self._wait_for_route_panel_text()
+            debug_info["route_panel_raw_text"] = route_panel_raw_text
             
             result = None
+            selected_route_index = None
             # Try multiple selectors
             for selector in config.GOOGLE_MAPS_SELECTORS:
                 try:
-                    element = WebDriverWait(self.driver, WAIT_TIME).until(
-                        EC.presence_of_element_located((By.CSS_SELECTOR, selector))
+                    elements = WebDriverWait(self.driver, WAIT_TIME).until(
+                        EC.presence_of_all_elements_located((By.CSS_SELECTOR, selector))
                     )
-                    result = element.text
-                    break
-                except:
+                    for element_index, element in enumerate(elements):
+                        text = element.text.strip()
+                        if not text:
+                            continue
+                        result = text
+                        selected_route_index = element_index
+                        break
+                    if result:
+                        break
+                except Exception:
                     continue
             
             if result is None:
                 result = "Không tìm thấy"
+
+            parsed_distance_text, parsed_distance_km = parse_distance_text(result)
+            parsed_duration_text = parse_duration_text(result)
+            debug_info.update(
+                {
+                    "selected_route_index": selected_route_index,
+                    "selected_route_raw_text": result,
+                    "parsed_distance_text": parsed_distance_text,
+                    "parsed_duration_text": parsed_duration_text,
+                    "parsed_distance_km": parsed_distance_km,
+                    "status_check": build_status_check(
+                        route_panel_raw_text=route_panel_raw_text,
+                        selected_route_raw_text=result,
+                        parsed_distance_km=parsed_distance_km,
+                        air_distance_km=air_distance_km,
+                        previous_route_raw_text=self.previous_route_raw_text,
+                    ),
+                }
+            )
+
+            if "SUSPECT_DISTANCE" in str(debug_info["status_check"]):
+                debug_info["screenshot_path"] = self._capture_screenshot(row_key)
             
             # Check for rate-limit indicators
             if config.ERROR_KEYWORDS.search(result):
@@ -122,12 +292,15 @@ class GoogleMapsDistanceCalculator:
                 self.logger.debug(f"Not found or error detected (consecutive: {self.consecutive_not_found})")
             else:
                 self.consecutive_not_found = 0
+
+            self.previous_route_raw_text = result
             
-            return result
+            return result, debug_info
             
         except Exception as e:
             self.logger.warning(f"Error during crawl: {e}")
-            return None
+            debug_info["status_check"] = "ERROR"
+            return None, debug_info
 
     def check_rate_limit(self, failed_count: int, batch_size: int) -> bool:
         """
@@ -175,6 +348,11 @@ def crawl_with_resume(df_input: pd.DataFrame) -> None:
         # Ensure this column can safely hold text values from Google Maps.
         df[config.DISTANCE_COL] = df[config.DISTANCE_COL].astype("object")
 
+    for column in DEBUG_COLUMNS:
+        if column not in df.columns:
+            df[column] = None
+        df[column] = df[column].astype("object")
+
     logger.info(f"Starting crawl: {total_rows} rows, {total_batches} batches")
     logger.info(f"Configuration: BATCH_SIZE={BATCH_SIZE}, SLEEP_TIME={SLEEP_TIME}s, WAIT_TIME={WAIT_TIME}s")
 
@@ -199,9 +377,22 @@ def crawl_with_resume(df_input: pd.DataFrame) -> None:
                 row = df.loc[idx]
                 lat1, lon1 = row['vi_do_1'], row['kinh_do_1']
                 lat2, lon2 = row['vi_do_2'], row['kinh_do_2']
+                air_distance_km = row.get("khoang_cach_chim_bay")
+                if pd.isna(air_distance_km):
+                    air_distance_km = None
 
                 logger.debug(f"Row {idx}: ({lat1},{lon1}) → ({lat2},{lon2})")
-                distance = calculator.calculate_distance(lat1, lon1, lat2, lon2)
+                distance, debug_info = calculator.calculate_distance(
+                    lat1=lat1,
+                    lon1=lon1,
+                    lat2=lat2,
+                    lon2=lon2,
+                    air_distance_km=float(air_distance_km) if air_distance_km is not None else None,
+                    row_key=f"row_{idx}",
+                )
+
+                for column, value in debug_info.items():
+                    df.at[idx, column] = value
                 
                 if distance is None:
                     batch_failed_count += 1
@@ -213,6 +404,16 @@ def crawl_with_resume(df_input: pd.DataFrame) -> None:
                         logger.debug(f"  → Not found")
                     else:
                         logger.debug(f"  → {distance[:50]}")
+
+                if str(debug_info.get("status_check")) != "OK":
+                    logger.warning(
+                        "  Debug status %s | origin=%s | destination=%s | parsed=%s | screenshot=%s",
+                        debug_info.get("status_check"),
+                        debug_info.get("origin_input"),
+                        debug_info.get("destination_input"),
+                        debug_info.get("parsed_distance_km"),
+                        debug_info.get("screenshot_path"),
+                    )
                 
                 time.sleep(SLEEP_TIME)
                 
