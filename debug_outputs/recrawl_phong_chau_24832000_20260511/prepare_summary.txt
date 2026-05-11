@@ -1,0 +1,9 @@
+input_final=data_20260504/final/road_distance_20260504_final_recrawl_ok_applied.xlsx
+code=24832000
+new_kinh_do=105.292801
+new_vi_do=21.339281
+rows_to_recrawl=51
+point1_rows=21
+point2_rows=30
+output_csv=debug_outputs/recrawl_phong_chau_24832000_20260511/recrawl_phong_chau_24832000_updated_coords.csv
+output_xlsx=debug_outputs/recrawl_phong_chau_24832000_20260511/recrawl_phong_chau_24832000_updated_coords.xlsx

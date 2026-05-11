@@ -1,0 +1,13 @@
+original_rows=8985
+merged_incremental_rows=8985
+rows_with_any_recrawl_status=8850
+rows_empty_not_saved_or_not_crawled=135
+ok_rows=8342
+applied_ok_rows=8342
+status_counts:
+  OK=8342
+  SUSPECT_DISTANCE|POSSIBLE_STALE_ROUTE=500
+  <EMPTY>=135
+  PARSE_FAILED|ROUTE_NOT_READY=4
+  SUSPECT_DISTANCE=3
+  POSSIBLE_STALE_ROUTE=1

@@ -1,0 +1,100 @@
+﻿global_index,original_excel_row,ma_phong_ban_1,ten_phong_ban_1,kinh_do_1,vi_do_1,ma_phong_ban_2,ten_phong_ban_2,kinh_do_2,vi_do_2,khoang_cach_chim_bay,tinh_thanh,PART_ID,row_in_part,Khoảng cách đường bộ,Khoảng cách đường bộ km,thời gian,source_output_file,source_kind,crawl_status,old_kinh_do_1,old_vi_do_1,old_kinh_do_2,old_vi_do_2,coord_update_note
+3307,3309,24000000,CN Phú Thọ,105.3895,21.317047,24832000,PGD Phong Châu,105.292801,21.339281,11.27864314629475,Phú Thọ,34,7,"23 min
+14.3 km",14.3,23 min,part/output_part_34/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.3895,21.317047,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+3357,3359,24030000,PGD Trung tâm,105.3985889,21.3118194,24832000,PGD Phong Châu,105.292801,21.339281,12.34965817013081,Phú Thọ,34,57,"24 min
+15.1 km",15.1,24 min,part/output_part_34/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.3985889,21.3118194,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+3406,3408,24032000,PGD Nông Trang,105.3712672,21.3371986,24832000,PGD Phong Châu,105.292801,21.339281,8.979259924538955,Phú Thọ,35,6,"21 min
+11.5 km",11.5,21 min,part/output_part_35/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.3712672,21.3371986,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+3454,3456,24034000,PGD Việt Trì,105.405247,21.3413701,24832000,PGD Phong Châu,105.292801,21.339281,12.45750245975509,Phú Thọ,35,54,"27 min
+15.5 km",15.5,27 min,part/output_part_35/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.405247,21.3413701,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+3501,3503,24037000,PGD Lâm Thao,105.2912916,21.3363021,24832000,PGD Phong Châu,105.292801,21.339281,1.232056687881576,Phú Thọ,36,1,"5 min
+2.2 km",2.2,5 min,part/output_part_36/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.2912916,21.3363021,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+3547,3549,24039000,PGD Thanh Thuỷ,105.2824387,21.1733139,24832000,PGD Phong Châu,105.292801,21.339281,19.17462997290131,Phú Thọ,36,47,"38 min
+26.3 km",26.3,38 min,part/output_part_36/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.2824387,21.1733139,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+3592,3594,24200000,CN Hùng Vương,105.4212113,21.3044202,24832000,PGD Phong Châu,105.292801,21.339281,14.83268101772907,Phú Thọ,36,92,"26 min
+17.6 km",17.6,26 min,part/output_part_36/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.4212113,21.3044202,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+3636,3638,24231000,PGD Hoà Phong,105.3880818,21.3291221,24832000,PGD Phong Châu,105.292801,21.339281,10.82947144880261,Phú Thọ,37,36,"23 min
+13.5 km",13.5,23 min,part/output_part_37/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.3880818,21.3291221,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+3679,3681,24232000,PGD Minh Phương,105.3759601,21.3314088,24832000,PGD Phong Châu,105.292801,21.339281,9.549012762986866,Phú Thọ,37,79,"21 min
+13.0 km",13.0,21 min,part/output_part_37/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.3759601,21.3314088,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+3721,3723,24233000,PGD Bạch Hạc,105.437828,21.292337,24832000,PGD Phong Châu,105.292801,21.339281,16.90239966003324,Phú Thọ,38,21,22.7 km,22.7,33 min,part/output_part_38/ket_qua_tu_0_den_99.xlsx,original_output,recrawled_ok,105.437828,21.292337,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+3762,3764,24234000,PGD Phố Gát,105.4135246,21.3041994,24832000,PGD Phong Châu,105.292801,21.339281,14.08583771632023,Phú Thọ,38,62,"25 min
+16.9 km",16.9,25 min,part/output_part_38/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.4135246,21.3041994,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+3802,3804,24400000,CN TX. Phú Thọ,105.2232767,21.400478,24832000,PGD Phong Châu,105.292801,21.339281,8.830199674335478,Phú Thọ,39,2,"16 min
+11.1 km",11.1,16 min,part/output_part_39/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.2232767,21.400478,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+3841,3843,24430000,PGD Chợ Mè,105.2229499,21.3968812,24832000,PGD Phong Châu,105.292801,21.339281,8.58479419651624,Phú Thọ,39,41,"17 min
+11.2 km",11.2,17 min,part/output_part_39/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.2229499,21.3968812,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+3879,3881,24431000,PGD Hùng Vương,105.2119023,21.4041162,24832000,PGD Phong Châu,105.292801,21.339281,9.975754483214555,Phú Thọ,39,79,"20 min
+12.7 km",12.7,20 min,part/output_part_39/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.2119023,21.4041162,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+3916,3918,24432000,PGD Công Thương Thanh Ba,105.1404626,21.501223,24832000,PGD Phong Châu,105.292801,21.339281,22.86769651657901,Phú Thọ,40,16,"40 min
+27.6 km",27.6,40 min,part/output_part_40/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.1404626,21.501223,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+3952,3954,24433000,PGD Phú Hộ,105.2514723,21.4438698,24832000,PGD Phong Châu,105.292801,21.339281,11.45235149507831,Phú Thọ,40,52,"25 min
+17.2 km",17.2,25 min,part/output_part_40/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.2514723,21.4438698,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+3987,3989,24434000,PGD Đoan Hùng,105.1861225,21.6231886,24832000,PGD Phong Châu,105.292801,21.339281,32.50506743135635,Phú Thọ,40,87,"45 min
+40.9 km",40.9,45 min,part/output_part_40/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.1861225,21.6231886,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+4021,4023,24435000,PGD Hạ Hòa,105.0054858,21.557987,24832000,PGD Phong Châu,105.292801,21.339281,37.33822804332974,Phú Thọ,41,21,"55 min
+53.3 km",53.3,55 min,part/output_part_41/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.0054858,21.557987,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+4054,4056,24436000,PGD Cẩm Khê,105.1274649,21.4212619,24832000,PGD Phong Châu,105.292801,21.339281,18.35131963428404,Phú Thọ,41,54,"36 min
+30.2 km",30.2,36 min,part/output_part_41/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.1274649,21.4212619,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+4086,4088,24600000,CN Vĩnh Phúc,105.5938839,21.3074726,24832000,PGD Phong Châu,105.292801,21.339281,32.27034926766184,Phú Thọ,41,86,"52 min
+43.9 km",43.9,52 min,part/output_part_41/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.5938839,21.3074726,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+4117,4119,24630000,PGD Thăng Long Vĩnh Phúc,105.6672576,21.3134648,24832000,PGD Phong Châu,105.292801,21.339281,39.75021624413117,Phú Thọ,42,17,"57 min
+54.8 km",54.8,57 min,part/output_part_42/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.6672576,21.3134648,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+4147,4149,24631000,PGD Bắc Vĩnh Yên,105.5774639,21.3067637,24832000,PGD Phong Châu,105.292801,21.339281,30.59636396058307,Phú Thọ,42,47,"56 min
+46.6 km",46.6,56 min,part/output_part_42/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.5774639,21.3067637,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+4176,4178,24632000,PGD Vĩnh Tường,105.4892082,21.2642599,24832000,PGD Phong Châu,105.292801,21.339281,23.00820411476116,Phú Thọ,42,76,"47 min
+28.8 km",28.8,47 min,part/output_part_42/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.4892082,21.2642599,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+4204,4206,24633000,PGD Nam Vĩnh Yên,105.6224034,21.3040709,24832000,PGD Phong Châu,105.292801,21.339281,35.24890464247445,Phú Thọ,43,4,"55 min
+46.0 km",46.0,55 min,part/output_part_43/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.6224034,21.3040709,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+4231,4233,24634000,PGD Tam Đảo,105.6106862,21.3886685,24832000,PGD Phong Châu,105.292801,21.339281,34.05588714488503,Phú Thọ,43,31,"49 min
+41.7 km",41.7,49 min,part/output_part_43/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.6106862,21.3886685,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+4257,4259,24635000,PGD Tam Dương,105.5409693,21.380109,24832000,PGD Phong Châu,105.292801,21.339281,26.77528387536902,Phú Thọ,43,57,"49 min
+37.2 km",37.2,49 min,part/output_part_43/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.5409693,21.380109,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+4282,4284,24636000,PGD Bắc Yên Lạc,105.5431793,21.2581699,24832000,PGD Phong Châu,105.292801,21.339281,28.45869215505325,Phú Thọ,43,82,"55 min
+36.5 km",36.5,55 min,part/output_part_43/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.5431793,21.2581699,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+4306,4308,24800000,CN Bắc Phú Thọ,105.3452867,21.3674783,24832000,PGD Phong Châu,105.292801,21.339281,6.689531421705668,Phú Thọ,44,6,"16 min
+9.0 km",9.0,16 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.3452867,21.3674783,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+4329,4331,24830000,PGD Vân Cơ,105.3650722,21.3400682,24832000,PGD Phong Châu,105.292801,21.339281,8.311160684808927,Phú Thọ,44,29,"21 min
+12.1 km",12.1,21 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.3650722,21.3400682,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+4351,4353,24831000,PGD Bãi Bằng,105.3131523,21.4074136,24832000,PGD Phong Châu,105.292801,21.339281,7.449575534451199,Phú Thọ,44,51,"16 min
+9.0 km",9.0,16 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.3131523,21.4074136,105.285056,21.345738,updated point 2 PGD Phong Chau 24832000
+4373,4375,24832000,PGD Phong Châu,105.292801,21.339281,24833000,PGD Văn Lang,105.3796015,21.327654,9.996746915965772,Phú Thọ,44,73,"22 min
+12.8 km",12.8,22 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.3796015,21.327654,updated point 1 PGD Phong Chau 24832000
+4374,4376,24832000,PGD Phong Châu,105.292801,21.339281,24834000,PGD Thanh Sơn,105.180244,21.213661,18.26544838472402,Phú Thọ,44,74,24.9 km,24.9,36 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,recrawled_ok,105.285056,21.345738,105.180244,21.213661,updated point 1 PGD Phong Chau 24832000
+4375,4377,24832000,PGD Phong Châu,105.292801,21.339281,24836000,PGD Tam Nông,105.2550266,21.2821678,7.722894342329363,Phú Thọ,44,75,8.9 km,8.9,13 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,recrawled_ok,105.285056,21.345738,105.2550266,21.2821678,updated point 1 PGD Phong Chau 24832000
+4376,4378,24832000,PGD Phong Châu,105.292801,21.339281,25000000,CN Hòa Bình,105.3400263,20.8193776,58.80590329198984,Phú Thọ,44,76,"1 hr 35 min
+71.1 km",71.1,1 hr 35 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.3400263,20.8193776,updated point 1 PGD Phong Chau 24832000
+4377,4379,24832000,PGD Phong Châu,105.292801,21.339281,25030000,PGD Sông Đà,105.3393964,20.8303057,57.5901464748674,Phú Thọ,44,77,"1 hr 32 min
+69.7 km",69.7,1 hr 32 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.3393964,20.8303057,updated point 1 PGD Phong Chau 24832000
+4378,4380,24832000,PGD Phong Châu,105.292801,21.339281,25032000,PGD Hữu Nghị,105.3349786,20.8366286,56.84688936894521,Phú Thọ,44,78,"1 hr 30 min
+68.8 km",68.8,1 hr 30 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.3349786,20.8366286,updated point 1 PGD Phong Chau 24832000
+4379,4381,24832000,PGD Phong Châu,105.292801,21.339281,25033000,PGD Kỳ Sơn,105.3513052,20.8868222,51.48980632824614,Phú Thọ,44,79,"1 hr 36 min
+73.6 km",73.6,1 hr 36 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.3513052,20.8868222,updated point 1 PGD Phong Chau 24832000
+4380,4382,24832000,PGD Phong Châu,105.292801,21.339281,25034000,PGD Lương Sơn,105.5333993,20.8722399,58.61521136467398,Phú Thọ,44,80,"2 hr
+75.0 km",75.0,2 hr,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.5333993,20.8722399,updated point 1 PGD Phong Chau 24832000
+4381,4383,24832000,PGD Phong Châu,105.292801,21.339281,26000000,CN Phúc Yên,105.7056066,21.2356891,45.25728593795193,Phú Thọ,44,81,"1 hr 4 min
+57.1 km",57.1,1 hr 4 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.7056066,21.2356891,updated point 1 PGD Phong Chau 24832000
+4382,4384,24832000,PGD Phong Châu,105.292801,21.339281,26030000,PGD Xuân Hoà,105.7260304,21.2747263,46.35892910722867,Phú Thọ,44,82,"1 hr 3 min
+59.4 km",59.4,1 hr 3 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.7260304,21.2747263,updated point 1 PGD Phong Chau 24832000
+4383,4385,24832000,PGD Phong Châu,105.292801,21.339281,26031000,PGD Honda VN,105.72113,21.2360304,46.7977581252069,Phú Thọ,44,83,"1 hr 9 min
+62.9 km",62.9,1 hr 9 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.72113,21.2360304,updated point 1 PGD Phong Chau 24832000
+4384,4386,24832000,PGD Phong Châu,105.292801,21.339281,26032000,PGD Lập Thạch,105.4642271,21.4151575,20.09367493260217,Phú Thọ,44,84,"42 min
+30.0 km",30.0,42 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.4642271,21.4151575,updated point 1 PGD Phong Chau 24832000
+4385,4387,24832000,PGD Phong Châu,105.292801,21.339281,26033000,PGD Lạc Hồng,105.5743859,21.2375558,32.29972946818135,Phú Thọ,44,85,"1 hr
+40.0 km",40.0,1 hr,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.5743859,21.2375558,updated point 1 PGD Phong Chau 24832000
+4386,4388,24832000,PGD Phong Châu,105.292801,21.339281,26034000,PGD Bắc Vĩnh Tường,105.497737,21.2778194,23.29032599347935,Phú Thọ,44,86,"44 min
+28.9 km",28.9,44 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.497737,21.2778194,updated point 1 PGD Phong Chau 24832000
+4387,4389,24832000,PGD Phong Châu,105.292801,21.339281,26200000,CN Bình Xuyên,105.6661217,21.2553437,40.73753711415267,Phú Thọ,44,87,"54 min
+51.8 km",51.8,54 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.6661217,21.2553437,updated point 1 PGD Phong Chau 24832000
+4388,4390,24832000,PGD Phong Châu,105.292801,21.339281,26230000,PGD Hương Canh,105.6461552,21.2773678,38.17146679114546,Phú Thọ,44,88,"56 min
+52.5 km",52.5,56 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.6461552,21.2773678,updated point 1 PGD Phong Chau 24832000
+4389,4391,24832000,PGD Phong Châu,105.292801,21.339281,26231000,PGD Yên Lạc,105.5778576,21.2342407,32.77180326212262,Phú Thọ,44,89,"1 hr
+40.7 km",40.7,1 hr,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.5778576,21.2342407,updated point 1 PGD Phong Chau 24832000
+4390,4392,24832000,PGD Phong Châu,105.292801,21.339281,26232000,PGD Vĩnh Lạc,105.5095714,21.219956,27.14325337258434,Phú Thọ,44,90,"51 min
+35.4 km",35.4,51 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.5095714,21.219956,updated point 1 PGD Phong Chau 24832000
+4391,4393,24832000,PGD Phong Châu,105.292801,21.339281,26233000,PGD Gia Khánh,105.6306002,21.3548149,35.80016186655816,Phú Thọ,44,91,"47 min
+41.3 km",41.3,47 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.6306002,21.3548149,updated point 1 PGD Phong Chau 24832000
+4392,4394,24832000,PGD Phong Châu,105.292801,21.339281,26234000,PGD Liên Bảo,105.6045759,21.3139211,33.28392784201783,Phú Thọ,44,92,"51 min
+43.4 km",43.4,51 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.6045759,21.3139211,updated point 1 PGD Phong Chau 24832000
+4393,4395,24832000,PGD Phong Châu,105.292801,21.339281,26235000,PGD Trưng Trắc,105.7103854,21.2315475,45.86011535518963,Phú Thọ,44,93,"1 hr 5 min
+57.4 km",57.4,1 hr 5 min,part/output_part_44/ket_qua_tu_0_den_99.xlsx,original_output,ok,105.285056,21.345738,105.7103854,21.2315475,updated point 1 PGD Phong Chau 24832000
